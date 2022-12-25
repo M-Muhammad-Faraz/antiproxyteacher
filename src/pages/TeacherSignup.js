@@ -7,7 +7,7 @@ import {
   AiOutlineKey,
 } from "react-icons/ai";
 import { GrPowerReset } from "react-icons/gr";
-import TeacherSignupField from "../../components/teacher/TeacherSignupField";
+import TeacherSignupField from "../components/TeacherSignupField";
 
 import classes from "./TeacherSignup.module.css";
 
