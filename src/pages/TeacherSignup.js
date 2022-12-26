@@ -17,6 +17,8 @@ const TeacherSignup = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [cPass, setCPass] = useState("");
+  const [success, setSuccess] = useState("");
+  const [successMsg, setSuccessMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -79,10 +81,14 @@ const TeacherSignup = () => {
           headers: { "content-type": "application/json" },
         })
         .then((res) => {
-          console.log(res);
+          setSuccess(true);
+          setErr(false);
+          setSuccessMessage(res.data.message);
         })
         .catch((err) => {
-          console.log(err);
+          setErr(true);
+          setSuccess(false);
+          setErrMsg(err.data.err);
         });
     } else {
       console.log("Fill all blanks correctly first");
@@ -94,6 +100,11 @@ const TeacherSignup = () => {
       <div className={"col-3 " + classes.side}></div>
       <div className="col-9 d-flex align-items-center justify-content-center flex-column">
         <div className={"mb-3 " + classes.heading1}>SIGNUP</div>
+        {err ? (
+          <div className="mb-2 text-danger">{errMsg}</div>
+        ) : (
+          <div className="mb-2 text-success">{successMsg}</div>
+        )}
         <form>
           <TeacherSignupField
             title={"Full Name"}
