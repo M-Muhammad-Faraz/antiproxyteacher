@@ -1,0 +1,25 @@
+.fullWindow {
+  position: relative;
+  height: 100vh;
+}
+.background {
+  background-image: url("../assets/Group\ 17.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 50%;
+  position: absolute;
+}
+
+.customBtn {
+  margin: auto;
+  width: 250px;
+  text-align: center;
+  padding: 15px;
+  background-color: #b96d37;
+  color: white;
+  border-radius: 50px;
+}
+.customBtn:hover {
+  background-color: #b96d37e3;
+}

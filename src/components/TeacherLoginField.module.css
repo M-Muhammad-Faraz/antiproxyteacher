@@ -1,0 +1,19 @@
+.customInp {
+  padding: 10px;
+  background-color: #edecec;
+  border-radius: 50px;
+  width: 400px;
+  margin-bottom: 10px;
+}
+.inp {
+  flex: 1;
+}
+.inp input {
+  width: 100%;
+  flex: 1;
+  background-color: #edecec;
+  border: none;
+  padding-left: 10px;
+  border-left: 1px solid grey;
+  outline: none;
+}
