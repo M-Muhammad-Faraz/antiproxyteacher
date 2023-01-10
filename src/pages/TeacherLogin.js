@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import TeacherLoginField from "../components/TeacherLoginField";
 import classes from "./TeacherLogin.module.css";
 import { AiOutlineMail, AiOutlineKey } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 const TeacherLogin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const submitHandler = async () => {
+    const res = await axios.post(
+      "http://localhost:8000/auth-teacher",
+      { email: email, password, password },
+      { headers: { "content-type": "application/json" } }
+    );
+    console.log(res);
+  };
   return (
     <div className={classes.fullWindow}>
       <div className={classes.background}></div>
@@ -20,10 +32,14 @@ const TeacherLogin = () => {
             <TeacherLoginField
               icon={<AiOutlineMail className="me-2" />}
               title={"Email"}
+              type="email"
+              setter={setEmail}
             />
             <TeacherLoginField
               icon={<AiOutlineKey className="me-2" />}
               title={"Password"}
+              type="password"
+              setter={setPassword}
             />
             <div className="d-flex justify-content-between">
               <div>
@@ -37,7 +53,12 @@ const TeacherLogin = () => {
             <div className="my-3 text-center">
               Dont have an account? <Link to={"/"}>Register</Link>
             </div>
-            <div className={classes.customBtn + " mt-3"}>LOGIN</div>
+            <div
+              className={classes.customBtn + " mt-3"}
+              onClick={submitHandler}
+            >
+              LOGIN
+            </div>
           </form>
         </div>
       </div>
