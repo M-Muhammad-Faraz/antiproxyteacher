@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC5YauizPccUhcYum1wUyTt7dxxiHFvNrY",
@@ -22,5 +23,7 @@ const actionCodeSettings = {
   // This must be true.
   handleCodeInApp: true,
 };
+
+const auth = getAuth(app);
 const db = getFirestore(app);
-export { app, actionCodeSettings, db };
+export { app, actionCodeSettings, db, auth };

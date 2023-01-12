@@ -4,6 +4,8 @@ import classes from "./TeacherLogin.module.css";
 import { AiOutlineMail, AiOutlineKey } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { signInWithCustomToken } from "firebase/auth";
+import { auth } from "../settings/firebase";
 
 const TeacherLogin = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +16,8 @@ const TeacherLogin = () => {
       { email: email, password, password },
       { headers: { "content-type": "application/json" } }
     );
-    console.log(res);
+    const user = await signInWithCustomToken(auth, res.data.token);
+    console.log(user);
   };
   return (
     <div className={classes.fullWindow}>
