@@ -1,0 +1,21 @@
+.profile h4 {
+  margin: 0;
+}
+.profilePic {
+  width: 50px;
+  height: 50px;
+  background-color: brown;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inner {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  color: brown;
+}
+.navLinks {
+}

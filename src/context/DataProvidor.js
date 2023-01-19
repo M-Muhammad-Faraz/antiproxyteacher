@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
-
+import { onAuthStateChanged } from "firebase/auth";
+import React, { useContext, useEffect, useState } from "react";
+import { auth } from "../settings/firebase";
 const DataContext = React.createContext();
 
 export const useData = () => {
@@ -7,12 +8,26 @@ export const useData = () => {
 };
 
 export const DataProvidor = ({ children }) => {
+  const [user, setUser] = useState(undefined);
+  useEffect(()=>{
+    onAuthStateChanged(auth, (usr) => {
+      if (usr) {
+        console.log(usr);
+        setUser(usr);
+      } else {
+        console.log("else Ran");
+        setUser(undefined);
+      }
+    });
+
+  },[
+    auth
+  ])
+
   return (
     <DataContext.Provider
       value={{
-        hello: () => {
-          console.log("Hello WOlrd");
-        },
+        user: true,
       }}
     >
       {children}

@@ -1,28 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TeacherSignup from "./pages/TeacherSignup";
 import { DataProvidor } from "./context/DataProvidor";
 import TeacherLogin from "./pages/TeacherLogin";
+import PrivateRoutes from "./components/PrivateRoutes";
+import TeacherPortal from "./pages/TeacherPortal";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <TeacherSignup />,
-  },
-  {
-    path: "/login",
-    element: <TeacherLogin />,
-  },
-]);
 
 root.render(
   <React.StrictMode>
     <DataProvidor>
-      <RouterProvider router={router} />
+      <Router>
+        <Routes>
+          <Route element={<PrivateRoutes />}>
+            <Route path="/" element={<TeacherPortal />} />
+          </Route>
+          <Route path="/login" element={<TeacherLogin />} />
+          <Route path="/register" element={<TeacherSignup />} />
+        </Routes>
+      </Router>
     </DataProvidor>
   </React.StrictMode>
 );

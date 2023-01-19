@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TeacherLoginField from "../components/TeacherLoginField";
 import classes from "./TeacherLogin.module.css";
 import { AiOutlineMail, AiOutlineKey } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import axios from "axios";
-import { signInWithCustomToken } from "firebase/auth";
+import { onAuthStateChanged, signInWithCustomToken } from "firebase/auth";
 import { auth } from "../settings/firebase";
 
 const TeacherLogin = () => {
+  useEffect(() => {
+    if (auth.currentUser) {
+      redirect("/");
+    }
+  }, [auth]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const submitHandler = async () => {
