@@ -1,6 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../settings/firebase";
+import { signOut } from "firebase/auth";
+import axios from "axios";
 const DataContext = React.createContext();
 
 export const useData = () => {
@@ -8,26 +10,35 @@ export const useData = () => {
 };
 
 export const DataProvidor = ({ children }) => {
-  const [user, setUser] = useState(undefined);
-  useEffect(()=>{
+  const [user, setUser] = useState(null);
+  const [lectures, setLectures] = useState([]);
+  const signout = async () => {
+    const res = await signOut(auth);
+  };
+  const getLectures = async (teacherID) => {
+    const res = await axios.post("http://localhost:8000/lectures", {
+      teacherID,
+    });
+    setLectures(res.data.msg);
+  };
+
+  useEffect(() => {
     onAuthStateChanged(auth, (usr) => {
       if (usr) {
-        console.log(usr);
         setUser(usr);
+        getLectures(usr.uid);
       } else {
-        console.log("else Ran");
-        setUser(undefined);
+        setUser(null);
       }
     });
-
-  },[
-    auth
-  ])
+  }, [auth]);
 
   return (
     <DataContext.Provider
       value={{
-        user: true,
+        user,
+        signout,
+        lectures,
       }}
     >
       {children}

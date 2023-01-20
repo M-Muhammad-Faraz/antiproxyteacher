@@ -7,6 +7,8 @@ import { DataProvidor } from "./context/DataProvidor";
 import TeacherLogin from "./pages/TeacherLogin";
 import PrivateRoutes from "./components/PrivateRoutes";
 import TeacherPortal from "./pages/TeacherPortal";
+import TeacherPortalPrivateRoute from "./utils/TeacherPortalPrivateRoute";
+import TeacherLoginPrivateRoute from "./utils/TeacherLoginPrivateRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,10 +17,22 @@ root.render(
     <DataProvidor>
       <Router>
         <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route path="/" element={<TeacherPortal />} />
-          </Route>
-          <Route path="/login" element={<TeacherLogin />} />
+          <Route
+            path="/"
+            element={
+              <TeacherPortalPrivateRoute>
+                <TeacherPortal />
+              </TeacherPortalPrivateRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <TeacherLoginPrivateRoute>
+                <TeacherLogin />
+              </TeacherLoginPrivateRoute>
+            }
+          />
           <Route path="/register" element={<TeacherSignup />} />
         </Routes>
       </Router>

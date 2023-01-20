@@ -19,3 +19,7 @@
 }
 .navLinks {
 }
+.navbar {
+  background-color: #fff;
+  filter: drop-shadow(0px 4px 4px rgba(187, 120, 72, 0.15));
+}
