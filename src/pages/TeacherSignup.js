@@ -9,7 +9,10 @@ import {
 import { GrPowerReset } from "react-icons/gr";
 import TeacherSignupField from "../components/TeacherSignupField";
 
+import loaderImg from "../assets/loader.svg";
+
 import classes from "./TeacherSignup.module.css";
+import { Link } from "react-router-dom";
 
 const TeacherSignup = () => {
   const [fullName, setFullname] = useState("");
@@ -17,7 +20,9 @@ const TeacherSignup = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [cPass, setCPass] = useState("");
-  const [success, setSuccess] = useState("");
+
+  const [formErr, setFormErr] = useState("");
+
   const [successMsg, setSuccessMessage] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [err, setErr] = useState(false);
@@ -74,24 +79,25 @@ const TeacherSignup = () => {
         teacher_email: email,
         teacher_password: pass,
       };
-
+      setFormErr("");
       console.log(creds);
+      setLoading(true);
       axios
         .post("http://localhost:8000/register-new-teacher", creds, {
           headers: { "content-type": "application/json" },
         })
         .then((res) => {
-          setSuccess(true);
           setErr(false);
           setSuccessMessage(res.data.message);
+          setLoading(false);
         })
         .catch((err) => {
           setErr(true);
-          setSuccess(false);
           setErrMsg(err.data.err);
+          setLoading(false);
         });
     } else {
-      console.log("Fill all blanks correctly first");
+      setFormErr("Fill all blanks correctly first");
     }
   };
 
@@ -100,10 +106,11 @@ const TeacherSignup = () => {
       <div className={"col-3 " + classes.side}></div>
       <div className="col-9 d-flex align-items-center justify-content-center flex-column">
         <div className={"mb-3 " + classes.heading1}>SIGNUP</div>
+        {formErr && <small className="mb-2 text-danger">{formErr}</small>}
         {err ? (
-          <div className="mb-2 text-danger">{errMsg}</div>
+          <small className="mb-2 text-danger">{errMsg}</small>
         ) : (
-          <div className="mb-2 text-success">{successMsg}</div>
+          <small className="mb-2 text-success">{successMsg}</small>
         )}
         <form>
           <TeacherSignupField
@@ -144,11 +151,29 @@ const TeacherSignup = () => {
           <div className={classes.check}>
             <input type="checkbox" />{" "}
             <label>
-              Agree to the <span>terms and conditions</span>.
+              Agree to the{" "}
+              <a href="http://www.google.com" className={classes.mainClr}>
+                terms and conditions
+              </a>
+              .
             </label>
           </div>
-          <div className={classes.customBtn + " mt-3"} onClick={handleSubmit}>
-            REGISTER
+          {loading ? (
+            <div className="text-center mt-3">
+              <img width={160} height={100} src={loaderImg} alt="" />
+            </div>
+          ) : (
+            <div className={classes.customBtn + " mt-3"} onClick={handleSubmit}>
+              REGISTER
+            </div>
+          )}
+          <div className="text-center mt-2">
+            <small>
+              Already have an account?
+              <Link to={"/login"} className={classes.mainClr + " ms-1"}>
+                Login
+              </Link>
+            </small>
           </div>
         </form>
       </div>

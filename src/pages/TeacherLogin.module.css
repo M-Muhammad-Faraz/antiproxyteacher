@@ -23,3 +23,12 @@
 .customBtn:hover {
   background-color: #b96d37e3;
 }
+.loginheading {
+  color: #b96d37;
+}
+.err {
+  color: #f55;
+}
+.card {
+  background-color: white;
+}

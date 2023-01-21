@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useData } from "../context/DataProvidor";
 import classes from "./PortalNavbar.module.css";
-
+import { AiOutlineLogout, AiOutlineSetting } from "react-icons/ai";
 function titleCase(str) {
   str = str.toLowerCase();
   str = str.split(" ");
@@ -13,6 +13,8 @@ function titleCase(str) {
 
 const PortalNavbar = () => {
   const userData = useData();
+  const [logoutHover, setLogoutHover] = useState(false);
+  const [hover, setHover] = useState(false);
   return (
     <div className={"fixed-top " + classes.navbar}>
       <header
@@ -37,9 +39,37 @@ const PortalNavbar = () => {
           </div>
         </div>
         <div className={"d-flex " + classes.navlinks}>
-          <div className="me-2">Dashboard</div>
-          <div className="me-2">Settings</div>
-          <div onClick={userData.signout}>Logout</div>
+          <div
+            className="me-2"
+            style={{ cursor: "pointer" }}
+            onMouseEnter={() => {
+              setHover(true);
+            }}
+            onMouseLeave={() => {
+              setHover(false);
+            }}
+          >
+            <span className={hover ? "me-1 " + classes.mainClr : "me-1 "}>
+              Setting
+            </span>{" "}
+            <AiOutlineSetting className={hover ? classes.mainClr : ""} />
+          </div>
+          <div
+            onClick={userData.signout}
+            className={"d-flex align-items-center "}
+            style={{ cursor: "pointer" }}
+            onMouseEnter={() => {
+              setLogoutHover(true);
+            }}
+            onMouseLeave={() => {
+              setLogoutHover(false);
+            }}
+          >
+            <span className={logoutHover ? "me-1 " + classes.mainClr : "me-1 "}>
+              Logout
+            </span>{" "}
+            <AiOutlineLogout className={logoutHover ? classes.mainClr : ""} />
+          </div>
         </div>
       </header>
     </div>

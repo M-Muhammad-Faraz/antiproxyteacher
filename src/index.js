@@ -21,6 +21,7 @@ root.render(
     <DataProvidor>
       <Router>
         <Routes>
+          <Route path="/register" element={<TeacherSignup />} />
           <Route
             path="/"
             element={
