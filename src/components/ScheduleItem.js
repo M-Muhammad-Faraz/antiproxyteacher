@@ -1,6 +1,11 @@
+import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useData } from "../context/DataProvidor";
 import classes from "./ScheduleItem.module.css";
 const ScheduleItem = ({ item, index }) => {
+  const lectureInfo = useData();
+  const navigate = useNavigate();
   return (
     <li
       id={index}
@@ -14,7 +19,25 @@ const ScheduleItem = ({ item, index }) => {
         </div>
       </div>
       <div>
-        <button className="btn btn-primary">Start Class</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(item);
+            axios
+              .post(
+                `http://localhost:8000/start-digital-class/${item.lecture_id}`
+              )
+              .then((res) => {
+                console.log(res);
+                lectureInfo.setListOfStudents(res.data.data);
+                lectureInfo.setClassInfo(item);
+                lectureInfo.setQrCode(res.data.qrcode);
+                navigate("/digital-class");
+              });
+          }}
+        >
+          Start Class
+        </button>
       </div>
     </li>
   );

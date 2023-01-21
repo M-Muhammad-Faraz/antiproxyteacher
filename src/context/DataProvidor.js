@@ -12,6 +12,12 @@ export const useData = () => {
 export const DataProvidor = ({ children }) => {
   const [user, setUser] = useState(null);
   const [lectures, setLectures] = useState([]);
+
+  const [classInfo, setClassInfo] = useState({});
+  const [listOfStudents, setListOfStudents] = useState([]);
+  const [isClassStarted, setIsClassStarted] = useState(false);
+  const [qrCode, setQrCode] = useState("");
+
   const signout = async () => {
     const res = await signOut(auth);
   };
@@ -39,6 +45,14 @@ export const DataProvidor = ({ children }) => {
         user,
         signout,
         lectures,
+        classInfo,
+        setClassInfo,
+        listOfStudents,
+        setListOfStudents,
+        isClassStarted,
+        setIsClassStarted,
+        qrCode,
+        setQrCode,
       }}
     >
       {children}
