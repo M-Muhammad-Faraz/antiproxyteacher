@@ -11,7 +11,7 @@ function titleCase(str) {
   return str.join(" "); // ["I'm", "A", "Little", "Tea", "Pot"].join(' ') => "I'm A Little Tea Pot"
 }
 
-const PortalNavbar = () => {
+const PortalNavbar = ({ setShow }) => {
   const userData = useData();
   const [logoutHover, setLogoutHover] = useState(false);
   const [hover, setHover] = useState(false);
@@ -47,6 +47,9 @@ const PortalNavbar = () => {
             }}
             onMouseLeave={() => {
               setHover(false);
+            }}
+            onClick={() => {
+              setShow(true);
             }}
           >
             <span className={hover ? "me-1 " + classes.mainClr : "me-1 "}>

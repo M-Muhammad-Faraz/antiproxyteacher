@@ -1,4 +1,30 @@
 .title {
-  min-width: 150px;
-  max-width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 250px;
+}
+.customBtn {
+  font-size: 14px;
+  padding: 7px 15px;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  background-color: #b96d37;
+  transition: all 250ms ease-in;
+}
+.customBtnResume {
+  background-color: #297b36;
+}
+.customBtnStop {
+  background-color: #ad3b3b;
+}
+.customBtn:hover {
+  background-color: #b96d37ba;
+}
+.customBtnResume:hover {
+  background-color: #297b37d9;
+}
+.customBtnStop:hover {
+  background-color: #ad3b3bd9;
 }

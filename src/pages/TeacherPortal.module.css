@@ -3,3 +3,38 @@
   display: flex;
   align-items: center;
 }
+.mainText {
+  color: #b96d37;
+  text-transform: uppercase;
+}
+.classList {
+  height: 450px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.classList ul {
+  max-height: 370px;
+  height: 100%;
+  overflow-y: scroll;
+}
+.welcomeMsg {
+  flex-grow: 0;
+}
+.welcomeImg {
+  height: 450px;
+  flex-grow: 0;
+}
+.welcomeImg img {
+  height: inherit;
+  width: 100%;
+  object-fit: cover;
+}
+.modal {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

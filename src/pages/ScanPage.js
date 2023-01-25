@@ -1,14 +1,20 @@
 import React from "react";
 import { useData } from "../context/DataProvidor";
 
+import classes from "./ScanPage.module.css";
+
 const ScanPage = () => {
   const { qrCode, setIsClassStarted } = useData();
   return (
-    <div className="">
+    <div className={"" + classes.bg}>
       {" "}
-      <h1>Please Scan In order to join class room</h1>
-      <img src={qrCode} alt="" width={400} height={400} />
+      <div className={"" + classes.fg}>
+        <h1>Please scan to join digital class</h1>
+        <img src={qrCode} alt="" width={400} height={400} />
+        <h4>Class Code: 12345</h4>
+      </div>
       <button
+        className={"" + classes.customBtn}
         onClick={() => {
           setIsClassStarted(true);
         }}
