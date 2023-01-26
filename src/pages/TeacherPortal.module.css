@@ -38,3 +38,19 @@
   align-items: center;
   justify-content: center;
 }
+.customBtn {
+  background-color: #b96d37;
+  width: 150px;
+  height: 50px;
+  color: #fff;
+  border: none;
+}
+.dangerBtn {
+  background-color: #b93b37;
+}
+.customBtn:hover {
+  background-color: #b96d37db;
+}
+.dangerBtn:hover {
+  background-color: #b93b37db;
+}

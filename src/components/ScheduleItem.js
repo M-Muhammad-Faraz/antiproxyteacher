@@ -28,7 +28,6 @@ const ScheduleItem = ({ item, index, setLecture, setShow }) => {
                   classes.customBtnResume + " me-2 " + classes.customBtn
                 }
                 onClick={() => {
-                  console.log(item);
                   axios
                     .post(
                       `http://localhost:8000/start-digital-class/${item.lecture_id}`
@@ -38,6 +37,7 @@ const ScheduleItem = ({ item, index, setLecture, setShow }) => {
                       lectureInfo.setListOfStudents(res.data.data);
                       lectureInfo.setClassInfo(item);
                       lectureInfo.setQrCode(res.data.qrcode);
+                      lectureInfo.setCode(res.data.code);
                       navigate("/digital-class");
                     });
                 }}

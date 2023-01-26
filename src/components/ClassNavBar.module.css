@@ -1,0 +1,12 @@
+.activeNav {
+  color: #b96d37 !important;
+}
+.regNav {
+  color: #000;
+}
+a.activeNav:hover {
+  color: #b96d37 !important;
+}
+a.regNav:hover {
+  color: #000;
+}

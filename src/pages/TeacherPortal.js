@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const TeacherPortal = () => {
-  const { lectures, setListOfStudents, setQrCode, setClassInfo } = useData();
+  const { lectures, setListOfStudents, setQrCode, setClassInfo, setCode } =
+    useData();
   const [lecture, setLecture] = useState({});
   const [modalShow, setModalShow] = useState(false);
   const [modalClassShow, setModalClassShow] = useState(false);
@@ -44,13 +45,21 @@ const TeacherPortal = () => {
           <h4>Are you sure you want to start digital class? </h4>
           <div>
             <p className="text-start ">
-              Subject name: {lecture.course_name} <br />
-              Time Slot: {lecture.time_slot}
+              <strong>Subject name: </strong>
+              {lecture.course_name} <br />
+              <strong>Time Slot: </strong>
+              {lecture.time_slot}
             </p>
           </div>
           <div>
-            <button onClick={() => setModalClassShow(false)}>Go Back</button>{" "}
             <button
+              className={classes.customBtn + " me-2 " + classes.dangerBtn}
+              onClick={() => setModalClassShow(false)}
+            >
+              Go Back
+            </button>{" "}
+            <button
+              className={"" + classes.customBtn}
               onClick={() => {
                 axios
                   .post(
@@ -61,6 +70,7 @@ const TeacherPortal = () => {
                     setListOfStudents(res.data.data);
                     setClassInfo(lecture);
                     setQrCode(res.data.qrcode);
+                    setCode(res.data.code);
                     navigate("/digital-class");
                   });
               }}

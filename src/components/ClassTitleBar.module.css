@@ -1,0 +1,12 @@
+.dangerBtn {
+  background-color: #b93b37;
+  width: 120px;
+  height: 40px;
+  color: white;
+  border: none;
+  border-radius: 7px;
+}
+.navbar {
+  border-bottom: 1px solid rgb(210, 210, 210);
+  height: 8vh;
+}

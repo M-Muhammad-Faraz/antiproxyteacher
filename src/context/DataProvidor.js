@@ -17,7 +17,7 @@ export const DataProvidor = ({ children }) => {
   const [listOfStudents, setListOfStudents] = useState([]);
   const [isClassStarted, setIsClassStarted] = useState(false);
   const [qrCode, setQrCode] = useState("");
-
+  const [code, setCode] = useState("");
   const signout = async () => {
     const res = await signOut(auth);
   };
@@ -53,6 +53,8 @@ export const DataProvidor = ({ children }) => {
         setIsClassStarted,
         qrCode,
         setQrCode,
+        code,
+        setCode,
       }}
     >
       {children}
