@@ -119,7 +119,9 @@ const TeacherLogin = () => {
             />
             <div className="d-flex justify-content-between">
               <div>
-                <Link className={classes.loginheading}>Forget Password</Link>
+                <Link className={classes.loginheading} to={"/recover-password"}>
+                  Forget Password
+                </Link>
               </div>
               <div className="d-flex align-items-center">
                 <input type="checkbox" className="me-1" />

@@ -36,7 +36,7 @@ const ClassNavBar = ({ tab, attendees, absentees, exceptions, total }) => {
           </Nav.Link>
           <div
             className={
-              "first" === tab ? classes.activeToffee : classes.regToffee
+              "second" === tab ? classes.activeToffee : classes.regToffee
             }
           >
             {absentees.length}
@@ -51,14 +51,14 @@ const ClassNavBar = ({ tab, attendees, absentees, exceptions, total }) => {
           </Nav.Link>
           <div
             className={
-              "first" === tab ? classes.activeToffee : classes.regToffee
+              "third" === tab ? classes.activeToffee : classes.regToffee
             }
           >
             {exceptions.length}
           </div>
         </li>
       </ul>
-      <div>
+      <div className="text-center">
         Total Students: <strong>{total}</strong>
       </div>
     </div>

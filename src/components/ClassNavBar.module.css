@@ -2,11 +2,26 @@
   color: #b96d37 !important;
 }
 .regNav {
-  color: #000;
+  color: #3a3a3a;
 }
 a.activeNav:hover {
   color: #b96d37 !important;
 }
 a.regNav:hover {
-  color: #000;
+  color: #3a3a3a;
+}
+
+.regToffee {
+  font-size: smaller;
+  background-color: #3a3a3a;
+  color: #fff;
+  padding: 1px 14px;
+  border-radius: 5px;
+}
+.activeToffee {
+  font-size: smaller;
+  background-color: #b96d37;
+  color: #fff;
+  padding: 1px 14px;
+  border-radius: 5px;
 }

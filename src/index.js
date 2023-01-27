@@ -13,6 +13,7 @@ import DigitalClass from "./pages/DigitalClass";
 import ScanCodeClassroomPrivateRoute from "./utils/ScanCodeClassroomPrivateRoute";
 import ScanPage from "./pages/ScanPage";
 import DigitalClassAfterCodePrivateRoute from "./utils/DigitalClassAfterCodePrivateRoute";
+import RecoverPassword from "./pages/RecoverPassword";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -55,6 +56,7 @@ root.render(
             }
           />
           <Route path="/register" element={<TeacherSignup />} />
+          <Route path="/recover-password" element={<RecoverPassword />} />
         </Routes>
       </Router>
     </DataProvidor>

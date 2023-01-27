@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { IoNotificationsOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../context/DataProvidor";
 import classes from "./ClassTitleBar.module.css";
@@ -23,7 +24,9 @@ const ClassTitleBar = ({ classroom }) => {
         <span>{classroom.course_code}</span>
       </div>
       <div className="d-flex align-items-center">
-        <div className="me-2">Notification</div>
+        <div className="me-2">
+          <IoNotificationsOutline size={26} />
+        </div>
         <div>
           <button
             className={"" + classes.dangerBtn}

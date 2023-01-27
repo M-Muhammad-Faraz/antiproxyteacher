@@ -7,6 +7,9 @@ import ClassTitleBar from "../components/ClassTitleBar";
 import ClassNavBar from "../components/ClassNavBar";
 
 import Tab from "react-bootstrap/Tab";
+import AttendeeTab from "../components/Tabs/AttendeeTab";
+import AbsenteeTab from "../components/Tabs/AbsenteeTab";
+import ExceptionTab from "../components/Tabs/ExceptionTab";
 
 const DigitalClass = () => {
   const [currentTab, setCurrentTab] = useState("first");
@@ -40,11 +43,17 @@ const DigitalClass = () => {
               total={listOfStudents.length}
             />
           </div>
-          <div className="col-md-9">
+          <div className="col-md-9 p-3">
             <Tab.Content>
-              <Tab.Pane eventKey="first">Tab 1</Tab.Pane>
-              <Tab.Pane eventKey="second">Tab 2</Tab.Pane>
-              <Tab.Pane eventKey="third">Tab 3</Tab.Pane>
+              <Tab.Pane eventKey="first">
+                <AttendeeTab attendees={classroom.attendees} />
+              </Tab.Pane>
+              <Tab.Pane eventKey="second">
+                <AbsenteeTab absentees={classroom.absentees} />
+              </Tab.Pane>
+              <Tab.Pane eventKey="third">
+                <ExceptionTab exceptions={classroom.exceptions} />
+              </Tab.Pane>
             </Tab.Content>
           </div>
         </div>
