@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./TeacherSignupField.module.css";
 import { GrClose } from "react-icons/gr";
-const TeacherSignupField = ({ title, icon, handler, type, validator }) => {
+const TeacherSignupField = ({ title, icon, handler, type, validator, val }) => {
   const [isValid, setIsValid] = useState(true);
   return (
     <div
@@ -24,7 +24,11 @@ const TeacherSignupField = ({ title, icon, handler, type, validator }) => {
           className={classes.inp}
           onChange={(e) => {
             handler(e.target.value);
-            setIsValid(validator(e.target.value));
+            if (val) {
+              setIsValid(validator(e.target.value, val));
+            } else {
+              setIsValid(validator(e.target.value));
+            }
           }}
         />
         {isValid ? null : <GrClose className={classes.svgs} />}

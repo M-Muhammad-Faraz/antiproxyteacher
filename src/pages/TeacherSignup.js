@@ -13,6 +13,44 @@ import loaderImg from "../assets/loader.svg";
 
 import classes from "./TeacherSignup.module.css";
 import { Link } from "react-router-dom";
+import { teacherAccount } from "../model/teacher";
+
+const NameValidator = (value) => {
+  console.log(value);
+  if (value.length >= 3) {
+    return true;
+  } else {
+    return false;
+  }
+};
+const PhoneValidator = (value) => {
+  if (value >= 11) {
+    return true;
+  } else {
+    return false;
+  }
+};
+const EmailValidator = (value) => {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+const PasswordValidator = (value) => {
+  if (value.length > 8) {
+    return true;
+  } else {
+    return false;
+  }
+};
+const CpassValidator = (value, pass) => {
+  if (value == pass) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 const TeacherSignup = () => {
   const [fullName, setFullname] = useState("");
@@ -28,50 +66,13 @@ const TeacherSignup = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const NameValidator = (value) => {
-    console.log(value);
-    if (value.length >= 3) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const PhoneValidator = (value) => {
-    if (value >= 11) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const EmailValidator = (value) => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const PasswordValidator = (value) => {
-    if (value.length > 8) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const CpassValidator = (value) => {
-    if (value == pass) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const handleSubmit = () => {
     if (
       NameValidator(fullName) &&
       PhoneValidator(phoneNo) &&
       EmailValidator(email) &&
       PasswordValidator(pass) &&
-      CpassValidator(cPass)
+      CpassValidator(cPass, pass)
     ) {
       const creds = {
         teacher_name: fullName,
@@ -79,13 +80,18 @@ const TeacherSignup = () => {
         teacher_email: email,
         teacher_password: pass,
       };
+      const newTeacherAcount = new teacherAccount(
+        fullName,
+        email,
+        phoneNo,
+        pass
+      );
       setFormErr("");
       console.log(creds);
       setLoading(true);
-      axios
-        .post("http://localhost:8000/register-new-teacher", creds, {
-          headers: { "content-type": "application/json" },
-        })
+
+      newTeacherAcount
+        .RegisterTeacher()
         .then((res) => {
           setErr(false);
           setSuccessMessage(res.data.message);
@@ -147,6 +153,7 @@ const TeacherSignup = () => {
             handler={setCPass}
             type={"password"}
             validator={CpassValidator}
+            val={pass}
           />
           <div className={classes.check}>
             <input type="checkbox" />{" "}

@@ -13,14 +13,14 @@ import ExceptionTab from "../components/Tabs/ExceptionTab";
 
 const DigitalClass = () => {
   const [currentTab, setCurrentTab] = useState("first");
-  const { classInfo, listOfStudents } = useData();
+  const { classInfo, teacherInfo, listOfStudents } = useData();
   const classroom = new Classroom(
     classInfo.course_code,
     classInfo.lecture_id,
     classInfo.course_name,
     classInfo.time_slot,
-    classInfo.teacher_id,
-    "Professor",
+    teacherInfo.teacher_id,
+    teacherInfo.teacher_name,
     listOfStudents
   );
 

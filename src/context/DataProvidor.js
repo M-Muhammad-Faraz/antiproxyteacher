@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { auth } from "../settings/firebase";
 import { signOut } from "firebase/auth";
 import axios from "axios";
+import { teacher } from "../model/teacher";
 const DataContext = React.createContext();
 
 export const useData = () => {
@@ -11,6 +12,7 @@ export const useData = () => {
 
 export const DataProvidor = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [teacherInfo, setTeacherInfo] = useState(null);
   const [lectures, setLectures] = useState([]);
 
   const [classInfo, setClassInfo] = useState({});
@@ -18,6 +20,7 @@ export const DataProvidor = ({ children }) => {
   const [isClassStarted, setIsClassStarted] = useState(false);
   const [qrCode, setQrCode] = useState("");
   const [code, setCode] = useState("");
+
   const signout = async () => {
     const res = await signOut(auth);
   };
@@ -32,8 +35,12 @@ export const DataProvidor = ({ children }) => {
     onAuthStateChanged(auth, (usr) => {
       if (usr) {
         setUser(usr);
+        setTeacherInfo(
+          new teacher(usr.uid, usr.displayName, usr.email, usr.phoneNumber)
+        );
         getLectures(usr.uid);
       } else {
+        setTeacherInfo(null);
         setUser(null);
       }
     });
@@ -55,6 +62,7 @@ export const DataProvidor = ({ children }) => {
         setQrCode,
         code,
         setCode,
+        teacherInfo,
       }}
     >
       {children}
