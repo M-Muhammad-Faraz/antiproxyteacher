@@ -22,7 +22,7 @@ export const DataProvidor = ({ children }) => {
   const [code, setCode] = useState("");
 
   const signout = async () => {
-    const res = await signOut(auth);
+    await signOut(auth);
   };
   const getLectures = async (teacherID) => {
     const res = await axios.post("http://localhost:8000/lectures", {
@@ -30,7 +30,6 @@ export const DataProvidor = ({ children }) => {
     });
     setLectures(res.data.msg);
   };
-
   useEffect(() => {
     onAuthStateChanged(auth, (usr) => {
       if (usr) {

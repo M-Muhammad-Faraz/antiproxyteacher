@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import illustration from "../assets/ilustration.png";
+import TeacherLoginField from "../components/TeacherLoginField";
 import classes from "./RecoverPassword.module.css";
 const RecoverPassword = () => {
   return (
@@ -9,24 +10,16 @@ const RecoverPassword = () => {
         <Col xs={6}>
           <img src={illustration} alt="Recover password illustration" />
         </Col>
-        <Col xs={6}>
+        <Col
+          xs={6}
+          className="d-flex flex-column align-items-center justify-content-center"
+        >
           <h3>Recover Password</h3>
           <p>
             Don’t worry! Enter the email address associated with your account
             we’ll send a link to recover your password.
           </p>
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-              style={{ borderRadius: 25, width: 180 }}
-            >
-              Send Link
-            </Button>
-          </Form>
+          <TeacherLoginField/>
         </Col>
       </Row>
     </Container>
