@@ -44,7 +44,10 @@ const TeacherLogin = () => {
 
   const submitHandler = async () => {
     let isError = false;
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    if (email.length === 0) {
+      setEmailErr("Email cannot be empty");
+      isError = true;
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setEmailErr("Invalid email address");
       isError = true;
     } else {
@@ -112,7 +115,7 @@ const TeacherLogin = () => {
 
             <small className={classes.err}>{passwordErr && passwordErr}</small>
             <TeacherLoginField
-              icon={<AiOutlineKey className="me-2" />}
+              icon={<AiOutlineKey />}
               title={"Password"}
               type="password"
               setter={setPassword}
