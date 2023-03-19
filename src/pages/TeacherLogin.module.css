@@ -19,6 +19,7 @@
   background-color: #b96d37;
   color: white;
   border-radius: 50px;
+  border: none;
 }
 .customBtn:hover {
   background-color: #b96d37e3;

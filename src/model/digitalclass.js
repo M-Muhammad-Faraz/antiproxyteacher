@@ -18,8 +18,8 @@ export class Classroom {
     this.teacher_id = teacher_id;
     this.teacher_name = teacher_name;
     this.total_students = list_of_student;
-    this.attendees = [];
-    this.absentees = [...this.total_students];
+    this.attendees = [this.total_students[0]];
+    this.absentees = [this.total_students[1]];
     this.exceptions = [];
     this.notification = [];
   }

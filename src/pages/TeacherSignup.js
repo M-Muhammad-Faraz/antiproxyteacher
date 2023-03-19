@@ -66,7 +66,8 @@ const TeacherSignup = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (
       NameValidator(fullName) &&
       PhoneValidator(phoneNo) &&
@@ -99,7 +100,7 @@ const TeacherSignup = () => {
         })
         .catch((err) => {
           setErr(true);
-          setErrMsg(err.data.err);
+          setErrMsg(err.response.data.actualERR.message);
           setLoading(false);
         });
     } else {
@@ -118,7 +119,7 @@ const TeacherSignup = () => {
         ) : (
           <small className="mb-2 text-success">{successMsg}</small>
         )}
-        <form>
+        <form onSubmit={handleSubmit}>
           <TeacherSignupField
             title={"Full Name"}
             icon={<AiOutlineUser className="me-2" size={20} />}
@@ -156,7 +157,7 @@ const TeacherSignup = () => {
             val={pass}
           />
           <div className={classes.check}>
-            <input type="checkbox" />{" "}
+            <input type="checkbox" required />
             <label>
               Agree to the{" "}
               <a href="http://www.google.com" className={classes.mainClr}>
@@ -170,8 +171,10 @@ const TeacherSignup = () => {
               <img width={160} height={100} src={loaderImg} alt="" />
             </div>
           ) : (
-            <div className={classes.customBtn + " mt-3"} onClick={handleSubmit}>
-              REGISTER
+            <div className="text-center">
+              <button className={classes.customBtn + " mt-3 "} type={"submit"}>
+                REGISTER
+              </button>
             </div>
           )}
           <div className="text-center mt-2">

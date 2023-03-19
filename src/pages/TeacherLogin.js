@@ -22,6 +22,7 @@ const TeacherLogin = () => {
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showElement, setShowElement] = useState(true);
+  const [rememberMe, setRememberMe] = useState();
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,8 +42,22 @@ const TeacherLogin = () => {
       setShowElement(true);
     }
   }, [screenWidth]);
+  useEffect(() => {
+    if (localStorage.getItem("email") && localStorage.getItem("password")) {
+      setEmail(localStorage.getItem("email"));
+      setPassword(localStorage.getItem("password"));
+    }
+  }, []);
 
-  const submitHandler = async () => {
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (rememberMe) {
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
+    } else {
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
+    }
     let isError = false;
     if (email.length === 0) {
       setEmailErr("Email cannot be empty");
@@ -102,54 +117,76 @@ const TeacherLogin = () => {
                 classes.card
           }
         >
-          <h3 className={"mb-3 " + classes.loginheading}>LOGIN</h3>
-          <small className={classes.err + " mb-2"}>{resErr && resErr}</small>
-          <form>
-            <small className={classes.err}>{emailErr && emailErr}</small>
-            <TeacherLoginField
-              icon={<AiOutlineMail className="me-2" />}
-              title={"Email"}
-              type="email"
-              setter={setEmail}
-            />
+          <div>
+            <h3 className={"text-center mb-3 " + classes.loginheading}>
+              LOGIN
+            </h3>
+            <small className={classes.err + " mb-2"}>{resErr && resErr}</small>
+            <form onSubmit={submitHandler}>
+              <small className={classes.err}>{emailErr && emailErr}</small>
+              <TeacherLoginField
+                icon={<AiOutlineMail className="me-2" />}
+                title={"Email"}
+                type="email"
+                value={email}
+                setter={setEmail}
+              />
 
-            <small className={classes.err}>{passwordErr && passwordErr}</small>
-            <TeacherLoginField
-              icon={<AiOutlineKey />}
-              title={"Password"}
-              type="password"
-              setter={setPassword}
-            />
-            <div className="d-flex justify-content-between">
-              <div>
-                <Link className={classes.loginheading} to={"/recover-password"}>
-                  Forget Password
+              <small className={classes.err}>
+                {passwordErr && passwordErr}
+              </small>
+              <TeacherLoginField
+                icon={
+                  <AiOutlineKey className="me-2" width={"100%"} height={20} />
+                }
+                value={password}
+                title={"Password"}
+                type="password"
+                setter={setPassword}
+              />
+              <div className="d-flex justify-content-between">
+                <div>
+                  <Link
+                    className={classes.loginheading}
+                    to={"/recover-password"}
+                  >
+                    Forget Password
+                  </Link>
+                </div>
+                <div className="d-flex align-items-center">
+                  <input
+                    type="checkbox"
+                    className="me-1"
+                    required
+                    onChange={(e) => {
+                      setRememberMe(e.target.checked);
+                    }}
+                  />
+                  <label>Remember</label>
+                </div>
+              </div>
+              <div className="my-3 text-center">
+                Dont have an account?{" "}
+                <Link to={"/register"} className={classes.loginheading}>
+                  Register
                 </Link>
               </div>
-              <div className="d-flex align-items-center">
-                <input type="checkbox" className="me-1" />
-                <label>Remember</label>
-              </div>
-            </div>
-            <div className="my-3 text-center">
-              Dont have an account?{" "}
-              <Link to={"/register"} className={classes.loginheading}>
-                Register
-              </Link>
-            </div>
-            {loader ? (
-              <div className="text-center mt-3">
-                <img width={160} height={100} src={loaderImg} alt="" />
-              </div>
-            ) : (
-              <div
-                className={classes.customBtn + " mt-3"}
-                onClick={submitHandler}
-              >
-                LOGIN
-              </div>
-            )}
-          </form>
+              {loader ? (
+                <div className="text-center mt-3">
+                  <img width={160} height={100} src={loaderImg} alt="" />
+                </div>
+              ) : (
+                <div className="text-center">
+                  <button
+                    className={classes.customBtn + " mt-3"}
+                    onClick={submitHandler}
+                  >
+                    LOGIN
+                  </button>
+                </div>
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </div>

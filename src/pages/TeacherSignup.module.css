@@ -17,6 +17,7 @@
   padding: 15px;
   background-color: #b96d37;
   color: white;
+  border: none;
   border-radius: 50px;
 }
 .customBtn:hover {

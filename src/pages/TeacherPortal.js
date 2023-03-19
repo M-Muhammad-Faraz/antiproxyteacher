@@ -75,7 +75,7 @@ const TeacherPortal = () => {
                   });
               }}
             >
-              Start
+              Generate QR
             </button>
           </div>
         </Modal.Body>
